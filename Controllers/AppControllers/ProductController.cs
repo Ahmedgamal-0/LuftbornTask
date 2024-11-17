@@ -21,32 +21,67 @@ namespace LuftbornTask.Controllers.AppControllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterProductCommand command)
         {
-            var mediatorResponse = await Mediator.Send(command);
-            return Ok(mediatorResponse);
+            try
+            {
+                var mediatorResponse = await Mediator.Send(command);
+                return Ok(mediatorResponse);
+            }
+            catch (Exception ex) 
+            {
+                return StatusCode(500, new { message = "Internal server error", error = ex.Message });
+            }
         }
         [HttpPut]
         public async Task<IActionResult> Update(UpdateProductCommand command)
         {
-            var mediatorResponse = await Mediator.Send(command);
-            return Ok(mediatorResponse);
+            try
+            {
+                var mediatorResponse = await Mediator.Send(command);
+                return Ok(mediatorResponse);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Internal server error", error = ex.Message });
+            }
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var mediatorResponse = await Mediator.Send(new DeleteProductCommand(id));
-            return Ok(mediatorResponse);
+            try
+            {
+                var mediatorResponse = await Mediator.Send(new DeleteProductCommand(id));
+                return Ok(mediatorResponse);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Internal server error", error = ex.Message });
+            }
         }
         [HttpGet]
         public async Task<IActionResult> GetAllProducts([FromQuery]GetAllProductsQuery command)
         {
-            var mediatorResponse = await Mediator.Send(command);
-            return Ok(mediatorResponse);
+            try
+            {
+                var mediatorResponse = await Mediator.Send(command);
+                return Ok(mediatorResponse);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Internal server error", error = ex.Message });
+            }
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var mediatorResponse = await Mediator.Send(new GetProductByIdQuery(id));
-            return Ok(mediatorResponse);
+            try
+            {
+                var mediatorResponse = await Mediator.Send(new GetProductByIdQuery(id));
+                return Ok(mediatorResponse);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Internal server error", error = ex.Message });
+            }
         }
         #endregion
     }
